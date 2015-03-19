@@ -10,6 +10,10 @@
 GLBatch	triangleBatch;
 GLShaderManager	shaderManager;
 
+GLfloat vVerts[] = { -0.5f, 0.0f, 0.0f, 
+		              0.5f, 0.0f, 0.0f,
+				      0.0f, 1.0f, 0.0f };
+
 // Window has changed size, or has just been created. In either case, we need
 // to use the window dimensions to set the viewport and the projection matrix.
 void ChangeSize(int w, int h) {
@@ -25,10 +29,7 @@ void SetupRC() {
 	shaderManager.InitializeStockShaders();
 
 	// Load up a triangle
-	GLfloat vVerts[] = { -0.5f, 0.0f, 0.0f, 
-		                  0.5f, 0.0f, 0.0f,
-						  0.0f, 0.5f, 0.0f };
-
+	
 	triangleBatch.Begin(GL_TRIANGLES, 3);
 	triangleBatch.CopyVertexData3f(vVerts);
 	triangleBatch.End();
@@ -45,6 +46,33 @@ void RenderScene(void) {
 
 	// Perform the buffer swap to display back buffer
 	glutSwapBuffers();
+    glutPostRedisplay();
+}
+
+void SpecialKeys(int key, int x, int y) {
+    GLfloat stepSize = 0.025f;
+    if(key == GLUT_KEY_UP && vVerts[7] + stepSize <= 1.0f) {
+        vVerts[1] += stepSize;
+        vVerts[4] += stepSize;
+        vVerts[7] += stepSize;
+    }
+    else if(key == GLUT_KEY_DOWN && vVerts[1] - stepSize >= -1.0f) {
+        vVerts[1] -= stepSize;
+        vVerts[4] -= stepSize;
+        vVerts[7] -= stepSize;
+    }
+    else if(key == GLUT_KEY_RIGHT && vVerts[3] + stepSize <= 1.0f) {
+        vVerts[0] += stepSize;
+        vVerts[3] += stepSize;
+        vVerts[6] += stepSize;
+    }
+    else if(key == GLUT_KEY_LEFT && vVerts[0] - stepSize >= -1.0f) {
+        vVerts[0] -= stepSize;
+        vVerts[3] -= stepSize;
+        vVerts[6] -= stepSize;
+    }
+    triangleBatch.CopyVertexData3f(vVerts);
+    //glutPostRedisplay();
 }
 
 // Main entry point for GLUT based programs
@@ -56,6 +84,7 @@ int main(int argc, char* argv[]) {
     glutCreateWindow("Triangle");
     glutReshapeFunc(ChangeSize);
     glutDisplayFunc(RenderScene);
+    glutSpecialFunc(SpecialKeys);
     GLenum err = glewInit();
     if(GLEW_OK != err) {
         fprintf(stderr, "GLEW Error: %s\n", glewGetErrorString(err));
