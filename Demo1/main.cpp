@@ -1,30 +1,31 @@
-#define WIN32
-
-#include <GLTools.h>
-#include <GLshaderManager.h>
+#include <GLTools.h>            // OpenGL toolkit
+#include <GLShaderManager.h>    // Shader Manager Class
 
 #ifdef __APPLE__
-#include <glut/glut.h>
+#include <glut/glut.h>          // OS X version of GLUT
 #else
-#include <GL/glut.h>
+#include <GL/glut.h>            // Windows FreeGlut equivalent
 #endif
 
+GLBatch	triangleBatch;
+GLShaderManager	shaderManager;
 
-GLBatch triangleBatch;
-GLShaderManager shaderManager;
-
+// Window has changed size, or has just been created. In either case, we need
+// to use the window dimensions to set the viewport and the projection matrix.
 void ChangeSize(int w, int h) {
-    glViewport(0, 0, w, h);    
+	glViewport(0, 0, w, h);
 }
 
-void SetupRC(){
+// This function does any needed initialization on the rendering context. 
+// This is the first opportunity to do any OpenGL related tasks.
+void SetupRC() {
 	// Blue background
 	glClearColor(0.0f, 0.0f, 1.0f, 1.0f );
     
 	shaderManager.InitializeStockShaders();
 
 	// Load up a triangle
-	GLfloat vVerts[] = { -0.5f, 0.0f, 0.0f,
+	GLfloat vVerts[] = { -0.5f, 0.0f, 0.0f, 
 		                  0.5f, 0.0f, 0.0f,
 						  0.0f, 0.5f, 0.0f };
 
@@ -33,15 +34,20 @@ void SetupRC(){
 	triangleBatch.End();
 }
 
+// Called to draw scene
 void RenderScene(void) {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH | GL_STENCIL_BUFFER_BIT);
+	// Clear the window with current clearing color
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-    GLfloat vRed[] = {1.0f, 0.0f, 0.0f, 1.0f};
-    shaderManager.UseStockShader(GLT_SHADER_IDENTITY, vRed);
-    triangleBatch.Draw();
-    glutSwapBuffers();
+	GLfloat vRed[] = { 1.0f, 0.0f, 0.0f, 1.0f };
+	shaderManager.UseStockShader(GLT_SHADER_IDENTITY, vRed);
+	triangleBatch.Draw();
+
+	// Perform the buffer swap to display back buffer
+	glutSwapBuffers();
 }
 
+// Main entry point for GLUT based programs
 int main(int argc, char* argv[]) {
     gltSetWorkingDirectory(argv[0]);
     glutInit(&argc, argv);
