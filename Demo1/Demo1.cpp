@@ -46,7 +46,7 @@ void RenderScene(void) {
 
 	// Perform the buffer swap to display back buffer
 	glutSwapBuffers();
-    glutPostRedisplay();
+    //glutPostRedisplay();
 }
 
 void SpecialKeys(int key, int x, int y) {
@@ -72,7 +72,7 @@ void SpecialKeys(int key, int x, int y) {
         vVerts[6] -= stepSize;
     }
     triangleBatch.CopyVertexData3f(vVerts);
-    //glutPostRedisplay();
+    glutPostRedisplay();
 }
 
 // Main entry point for GLUT based programs
