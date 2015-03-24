@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{2DDCC6B4-B463-46F0-B439-CE705CD42E1B}</ProjectGuid>
+    <ProjectGuid>{2E7323CD-E3A6-4D6E-AB2E-41ACA19D9CC7}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>GeoTest</RootNamespace>
+    <RootNamespace>Smoother</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -59,7 +59,6 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -79,12 +78,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Smoother.cpp" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\GLTools\GLTools.vcxproj">
       <Project>{b7a851c1-3282-4f2b-9d1a-2fbdc5351b7a}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="GeoTest.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
