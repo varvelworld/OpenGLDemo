@@ -121,15 +121,6 @@ void RenderScene(void)
 								 transformPipeline.GetModelViewProjectionMatrix(),
 								 vFloorColor);	
 	floorBatch.Draw();    
-    
-    for(int i = 0; i < NUM_SPHERES; i++) {
-        modelViewMatrix.PushMatrix();
-        modelViewMatrix.MultMatrix(spheres[i]);
-        shaderManager.UseStockShader(GLT_SHADER_POINT_LIGHT_DIFF, transformPipeline.GetModelViewMatrix(), 
-                                transformPipeline.GetProjectionMatrix(), vLightEyePos, vSphereColor);
-        sphereBatch.Draw();
-        modelViewMatrix.PopMatrix();
-        }
 
     // Draw the spinning Torus
     modelViewMatrix.Translate(0.0f, 0.0f, -2.5f);
@@ -144,12 +135,16 @@ void RenderScene(void)
         torusBatch.Draw();
     modelViewMatrix.PopMatrix(); // "Erase" the Rotation from before
 
-    // Apply another rotation, followed by a translation, then draw the sphere
-    modelViewMatrix.Rotate(yRot * -2.0f, 0.0f, 1.0f, 0.0f);
-    modelViewMatrix.Translate(0.8f, 0.0f, 0.0f);
-    shaderManager.UseStockShader(GLT_SHADER_POINT_LIGHT_DIFF, transformPipeline.GetModelViewMatrix(), 
+
+    for(int i = 0; i < NUM_SPHERES; i++) {
+        modelViewMatrix.PushMatrix();
+        modelViewMatrix.Rotate(yRot * -2.0f, 0.0f, 1.0f, 0.0f);
+        modelViewMatrix.MultMatrix(spheres[i]);
+        shaderManager.UseStockShader(GLT_SHADER_POINT_LIGHT_DIFF, transformPipeline.GetModelViewMatrix(), 
                                 transformPipeline.GetProjectionMatrix(), vLightEyePos, vSphereColor);
-    sphereBatch.Draw();
+        sphereBatch.Draw();
+        modelViewMatrix.PopMatrix();
+        }
 
 	// Restore the previous modleview matrix (the identity matrix)
 	modelViewMatrix.PopMatrix();

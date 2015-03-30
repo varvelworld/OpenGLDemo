@@ -19,6 +19,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ModelViewProjection", "Mode
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sphereworld4", "Sphereworld4\Sphereworld4.vcxproj", "{65F68ECF-39F7-4329-B726-532BD338D13D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Demo2", "Demo2\Demo2.vcxproj", "{BF20A640-2AFD-4D25-A2BB-8386E568AF3B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -61,6 +63,10 @@ Global
 		{65F68ECF-39F7-4329-B726-532BD338D13D}.Debug|Win32.Build.0 = Debug|Win32
 		{65F68ECF-39F7-4329-B726-532BD338D13D}.Release|Win32.ActiveCfg = Release|Win32
 		{65F68ECF-39F7-4329-B726-532BD338D13D}.Release|Win32.Build.0 = Release|Win32
+		{BF20A640-2AFD-4D25-A2BB-8386E568AF3B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BF20A640-2AFD-4D25-A2BB-8386E568AF3B}.Debug|Win32.Build.0 = Debug|Win32
+		{BF20A640-2AFD-4D25-A2BB-8386E568AF3B}.Release|Win32.ActiveCfg = Release|Win32
+		{BF20A640-2AFD-4D25-A2BB-8386E568AF3B}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
